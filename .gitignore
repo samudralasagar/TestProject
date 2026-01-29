@@ -76,6 +76,16 @@ mono_crash.*
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Ignore the "bin" and "obj" folders
+bin/
+obj/
+Library/
+Logs/
+Temp/
+Builds/
+UserSettings/
+Recordings/
+
 # TestRunner generated files
 InitTestScene*.unity*
 
