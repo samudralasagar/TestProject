@@ -13,7 +13,7 @@ namespace MatchTwoCard
         [SerializeField] private AudioSource audioSourceSFX;
         [SerializeField] private List<AudioClip> audioClipSFXList;
         
-        private string baseKey = nameof(AudioManager);
+        //private string baseKey = nameof(AudioManager);
 
         
 
@@ -59,5 +59,5 @@ namespace MatchTwoCard
  
     }
 
-    public enum AudioID {ALERT, BUTTON, FAIL, FAN, FREEZE, TREASURE, UNDO, VACUUM, WIN, COIN, TILE, OUTOFSPACE, CHESTKEY, EVENTKEY, CHESTOPEN, LOWtIME,MATCHTHREE, Z_Booster_Extra_Timer, Z_Booster_Bomb, CLEAROUTOFSPACE, COLLECTREWARD_D_M_P, EventPhonesTouch, SLIDESOUND, Life_Donated,TrashPicker }
+    public enum AudioID {CardFlip,Coin,GameOver,Match,MissMatch,Success, BUTTON }
 }

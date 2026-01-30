@@ -15,6 +15,7 @@ namespace MatchTwoCard
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private TMP_Text matchesText;
         
+        public bool isBuyingTurns = false;
 
         // Start is called before the first frame update
         void Start()
@@ -34,7 +35,10 @@ namespace MatchTwoCard
         public void UpdateLevelData()
         {
             levelText.text = "Level : " + LevelManager.Instance.Level.ToString();
-            LevelManager.Instance.ResetLevelTurns();
+            if (LevelManager.Instance.WorkingTurns <= 0 && !isBuyingTurns)
+            {
+                LevelManager.Instance.ResetLevelTurns();
+            }
             LevelManager.Instance.LoadCurrentLeveldata();
             if (CardController.Instance != null)
             {

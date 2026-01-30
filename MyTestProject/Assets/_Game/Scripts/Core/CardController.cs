@@ -17,8 +17,8 @@ namespace MatchTwoCard
             set => sprites = value;
         }
 
-        Card firstSelectedCard;
-        Card secondSelectedCard;
+        [SerializeField] private Card firstSelectedCard;
+        [SerializeField] private Card secondSelectedCard;
         public int matchCount = 0;
         void Start()
         {
@@ -78,12 +78,14 @@ namespace MatchTwoCard
                 selectedCard.ShowCard();
                 if (firstSelectedCard == null)
                 {
+                    AudioManager.Instance.PlayAudio(AudioID.CardFlip);
                     firstSelectedCard = selectedCard;
                     return;
                 }
 
                 if (secondSelectedCard == null)
                 {
+                    AudioManager.Instance.PlayAudio(AudioID.CardFlip);
                     secondSelectedCard = selectedCard;
                     StartCoroutine(CheckMatch());
                 }
@@ -100,6 +102,7 @@ namespace MatchTwoCard
             yield return new WaitForSeconds(0.2f);
             if (firstSelectedCard.iconSprite == secondSelectedCard.iconSprite)
             {
+                AudioManager.Instance.PlayAudio(AudioID.Match);
                 // Match found
                 matchCount++;
                 if (matchCount >= spritePairs.Count / 2)
@@ -112,6 +115,7 @@ namespace MatchTwoCard
             }
             else
             {
+                AudioManager.Instance.PlayAudio(AudioID.MissMatch);
                 // Mismatch - decrement turns
                 if (LevelManager.Instance != null && LevelManager.Instance.levelData != null)
                 {
@@ -120,8 +124,10 @@ namespace MatchTwoCard
                     if (LevelManager.Instance.WorkingTurns <= 0)
                     {
                         Debug.Log("No turns left! Level Failed!");
-                        LevelManager.Instance.ResetLevelTurns();
-                        PopupUIManager.Instance.OpenUI<LevelFailUI>();  
+                        //LevelManager.Instance.ResetLevelTurns();
+                        
+                        PopupUIManager.Instance.OpenUI<LevelFailUI>();
+                        ResetCardData();
                         yield break;
                     }
                 }
@@ -134,6 +140,14 @@ namespace MatchTwoCard
 
             // Always update HUD after match/mismatch
             UIManager.Instance.GetUI<HUD>().UpdateHUD();            
+        }
+
+        public void ResetCardData()
+        {
+            firstSelectedCard.HideCard();
+            secondSelectedCard.HideCard();
+            firstSelectedCard = null;
+            secondSelectedCard = null;
         }
 
         public void ResetGridData()

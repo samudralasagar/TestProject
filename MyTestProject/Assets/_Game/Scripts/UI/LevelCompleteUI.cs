@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,8 +16,19 @@ namespace MatchTwoCard
             nextLevelButton.onClick.AddListener(OnNextLevelButtonClicked);
         }
 
+        private void OnEnable()
+        {
+            DOVirtual.DelayedCall(0.5f,()=>
+            {
+                CurrencyManager.Instance.AddCoins(5);
+                AudioManager.Instance.PlayAudio(AudioID.Success);
+            });
+            
+        }
+
         private void OnNextLevelButtonClicked()
         {
+            UIManager.Instance.PlayButtonClickAudio();
             LevelManager.Instance.LevelFinished();
             CloseUI();
         }

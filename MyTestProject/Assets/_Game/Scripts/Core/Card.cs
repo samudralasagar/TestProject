@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,15 +35,27 @@ namespace MatchTwoCard
         }
 
         public void ShowCard()
-        {
+        {            
+            // Rotate front face 180° to reveal
+            transform.DORotate(new Vector3(0, 180, 0), 0.3f)
+                .SetEase(Ease.OutBack)
+                .OnComplete(() => {
+                    cardIconImage.sprite = iconSprite;  // Reveal icon after flip
+                });
             isRevealed = true;
-            cardIconImage.sprite = iconSprite;
         }
 
+
         public void HideCard()
-        {
+        {   
+            DOTween.To(() =>  transform.eulerAngles.y,
+                       x =>  transform.eulerAngles = new Vector3(0, x, 0),
+                       0f, 0.3f)  // Same 0.3s duration
+                   .SetEase(Ease.InBack)
+                   .OnComplete(() => {
+                       cardIconImage.sprite = hidIconSprite;  // Hide after flip
+                   });
             isRevealed = false;
-            cardIconImage.sprite = hidIconSprite;
         }
 
 

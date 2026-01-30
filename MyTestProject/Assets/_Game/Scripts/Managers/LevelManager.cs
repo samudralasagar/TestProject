@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,7 +14,7 @@ namespace MatchTwoCard
         [SerializeField] private int maxLevel;
         [SerializeField] private int currentLevelIndex;
         [SerializeField] private int workingTurns;
-        
+
         public int WorkingTurns
         {
             get => workingTurns;
@@ -48,7 +49,7 @@ namespace MatchTwoCard
         public void LoadData()
         {
             currentLevelIndex = GameDataManager.Instance.GetValue(baseKey, 0);
-            
+
         }
 
         public void LoadCurrentLeveldata()
@@ -83,19 +84,27 @@ namespace MatchTwoCard
         }
 
         public void RestartLevel()
-        {             
+        {
             LoadCurrentLeveldata();
             UIManager.Instance.GetUI<HUD>().UpdateLevelData();
             UIManager.Instance.GetUI<HUD>().UpdateHUD();
+            UIManager.Instance.GetUI<HUD>().isBuyingTurns = false;
+            
         }
 
         public void ResetLevelTurns()
         {
             if (levelData != null)
             {
-                workingTurns = levelData.turns;  
+                workingTurns = levelData.turns;
             }
         }
 
+        internal void BuyExtraTurns(int extraTurns)
+        {
+            UIManager.Instance.GetUI<HUD>().isBuyingTurns = true;
+            workingTurns += extraTurns;
+            UIManager.Instance.GetUI<HUD>().UpdateHUD();
+        }
     }
 }

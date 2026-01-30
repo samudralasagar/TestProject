@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardIconImage: {fileID: 6262931738035544244}
-  hidIconSprite: {fileID: 21300000, guid: 9f1b001091e0cf24fab9ba99791efbab, type: 3}
+  hidIconSprite: {fileID: 21300000, guid: 831f15e891448a5458fd9cb37ec9d807, type: 3}
   iconSprite: {fileID: 0}
   isRevealed: 0
   cardController: {fileID: 0}
