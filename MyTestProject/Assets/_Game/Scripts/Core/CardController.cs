@@ -144,23 +144,27 @@ namespace MatchTwoCard
 
         public void ResetCardData()
         {
-            firstSelectedCard.HideCard();
-            secondSelectedCard.HideCard();
+            if (firstSelectedCard != null)
+            {
+                firstSelectedCard.HideCard();
+            }
+                
+            if (secondSelectedCard != null)
+            {
+                secondSelectedCard.HideCard();
+            }
+                
             firstSelectedCard = null;
             secondSelectedCard = null;
         }
 
         public void ResetGridData()
         {
-            
-
             if (gridTransform == null)
             {
                 Debug.LogError("gridTransform is null!");
                 return;
             }
-
-
             if (gridTransform.childCount > 0)
             {
                 for (int i = gridTransform.childCount - 1; i >= 0; i--)
@@ -168,7 +172,6 @@ namespace MatchTwoCard
                     Destroy(gridTransform.GetChild(i).gameObject);
                 }
             }
-
             firstSelectedCard = null;
             secondSelectedCard = null;
             matchCount = 0;

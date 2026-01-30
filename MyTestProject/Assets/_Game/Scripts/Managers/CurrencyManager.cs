@@ -30,7 +30,12 @@ namespace MatchTwoCard
         private void OnDisable()
         {
             GameDataManager.onDataUpdated -= OnLoadData;
+            //OnSaveData();
+        }
+        protected override void OnApplicationQuit()
+        {
             OnSaveData();
+            base.OnApplicationQuit();
         }
         private void OnLoadData()
         {

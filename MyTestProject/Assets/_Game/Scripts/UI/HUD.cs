@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 
 namespace MatchTwoCard
 {
@@ -14,13 +15,20 @@ namespace MatchTwoCard
         [SerializeField] private TMP_Text turnsText;
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private TMP_Text matchesText;
+        [SerializeField] private Button btnHome;
         
         public bool isBuyingTurns = false;
 
         // Start is called before the first frame update
         void Start()
         {
+            btnHome.onClick.AddListener(OnHomeButtonClicked);
+        }
 
+        private void OnHomeButtonClicked()
+        {
+            UIManager.Instance.PlayButtonClickAudio();
+            LevelManager.Instance.Home();
         }
 
         private async void OnEnable()

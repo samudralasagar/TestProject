@@ -83,6 +83,13 @@ namespace MatchTwoCard
             UIManager.Instance.SwitchUI<MainMenu>();
         }
 
+        public void Home()
+        {
+            CardController.Instance.ResetCardData();
+            CardController.Instance.ResetGridData();
+            UIManager.Instance.SwitchUI<MainMenu>();
+        }
+
         public void RestartLevel()
         {
             LoadCurrentLeveldata();
